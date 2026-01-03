@@ -570,13 +570,13 @@ class HotelCard extends StatelessWidget {
                         SizedBox(height: 5),
                         Row(
                           children: [
-                            Icon(Icons.star, color: Colors.amber, size: 14),
-                            Icon(Icons.star, color: Colors.amber, size: 14),
-                            Icon(Icons.star, color: Colors.amber, size: 14),
-                            Icon(Icons.star, color: Colors.amber, size: 14),
+                            Icon(Icons.star, color: d_green, size: 14),
+                            Icon(Icons.star, color: d_green, size: 14),
+                            Icon(Icons.star, color: d_green, size: 14),
+                            Icon(Icons.star, color: d_green, size: 14),
                             Icon(
                               Icons.star_outline,
-                              color: Colors.amber,
+                              color: d_green,
                               size: 14,
                             ),
                             SizedBox(width: 5),
