@@ -215,7 +215,64 @@ class SearchSection extends StatelessWidget {
 }
 
 class HotelSection extends StatelessWidget {
-  const HotelSection({super.key});
+  final List<Map<String, dynamic>> hotelList = [
+    {
+      "name": "Grand Royl Hotel",
+      "location": "City X",
+      "distance": 2,
+      "review": 35,
+      "picture": "images/hotel_1.jpg",
+      "price": 120,
+    },
+    {
+      "name": "Sunny Side Inn",
+      "location": "City X",
+      "distance": 3,
+      "review": 42,
+      "picture": "images/hotel_2.jpg",
+      "price": 95,
+    },
+    {
+      "name": "Blue Horizon Hotel",
+      "location": "City X",
+      "distance": 1.5,
+      "review": 50,
+      "picture": "images/hotel_3.jpg",
+      "price": 150,
+    },
+    {
+      "name": "Royal Comfort Suites",
+      "location": "City X",
+      "distance": 4,
+      "review": 28,
+      "picture": "images/hotel_4.jpg",
+      "price": 110,
+    },
+    {
+      "name": "City Lights Hotel",
+      "location": "City X",
+      "distance": 2.8,
+      "review": 37,
+      "picture": "images/hotel_5.jpg",
+      "price": 130,
+    },
+    {
+      "name": "The Elegant Stay",
+      "location": "City X",
+      "distance": 3.5,
+      "review": 45,
+      "picture": "images/hotel_6.jpg",
+      "price": 140,
+    },
+    {
+      "name": "Sunset Paradise Inn",
+      "location": "City X",
+      "distance": 5,
+      "review": 30,
+      "picture": "images/hotel_7.jpg",
+      "price": 100,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -229,33 +286,94 @@ class HotelSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                    Text(" 550 Hotels Found", style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[800],
-                      fontWeight: FontWeight.w400
-                    ),),
-                    Row(
-                      children: [
-                        Text("Filter", style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500
-                        ),),
-                        SizedBox(width: 5),
-                        Icon(Icons.filter_list, color: d_green,),
-                      ],
-                    )
-              ],),
+                Text(
+                  " 550 Hotels Found",
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Filter",
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Icon(Icons.filter_list, color: d_green),
+                  ],
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 10),
-          Container(
-            color: Colors.blue,
-            height: 5000,
-          )
+          Column(
+            children: hotelList.map((hotel) {
+              return Container(
+                margin: EdgeInsets.only(bottom: 15),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        hotel['picture'],
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            hotel['name'],
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '${hotel['location']} • ${hotel['distance']} km to city',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            '${hotel['review']} reviews',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            '\$${hotel['price']}/night',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: d_green,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
         ],
-        
       ),
-      // Implementation for hotel section goes here
     );
   }
 }
