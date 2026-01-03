@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               SearchSection(),
-              HotelSection(),
+              HotelSectionV2(),
               // Additional sections can be added here
             ],
           ),
@@ -342,18 +342,12 @@ class HotelSection extends StatelessWidget {
                           SizedBox(height: 5),
                           Text(
                             '${hotel['location']} • ${hotel['distance']} km to city',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
                           ),
                           SizedBox(height: 5),
                           Text(
                             '${hotel['review']} reviews',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
                           ),
                           SizedBox(height: 10),
                           Text(
@@ -371,6 +365,247 @@ class HotelSection extends StatelessWidget {
                 ),
               );
             }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HotelSectionV2 extends StatelessWidget {
+  final List<Map<String, dynamic>> hotelList = [
+    {
+      "name": "Grand Royl Hotel",
+      "location": "City X",
+      "distance": 2,
+      "review": 35,
+      "picture": "images/hotel_1.jpg",
+      "price": 120,
+    },
+    {
+      "name": "Sunny Side Inn",
+      "location": "City X",
+      "distance": 3,
+      "review": 42,
+      "picture": "images/hotel_2.jpg",
+      "price": 95,
+    },
+    {
+      "name": "Blue Horizon Hotel",
+      "location": "City X",
+      "distance": 1.5,
+      "review": 50,
+      "picture": "images/hotel_3.jpg",
+      "price": 150,
+    },
+    {
+      "name": "Royal Comfort Suites",
+      "location": "City X",
+      "distance": 4,
+      "review": 28,
+      "picture": "images/hotel_4.jpg",
+      "price": 110,
+    },
+    {
+      "name": "City Lights Hotel",
+      "location": "City X",
+      "distance": 2.8,
+      "review": 37,
+      "picture": "images/hotel_5.jpg",
+      "price": 130,
+    },
+    {
+      "name": "The Elegant Stay",
+      "location": "City X",
+      "distance": 3.5,
+      "review": 45,
+      "picture": "images/hotel_6.jpg",
+      "price": 140,
+    },
+    {
+      "name": "Sunset Paradise Inn",
+      "location": "City X",
+      "distance": 5,
+      "review": 30,
+      "picture": "images/hotel_7.jpg",
+      "price": 100,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: Colors.white,
+      child: Column(
+        children: [
+          Container(
+            height: 50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  " 550 Hotels Found",
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[800],
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Filter",
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Icon(Icons.filter_list, color: d_green),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Column(
+            children: hotelList.map((hotel) {
+              return HotelCard(hotel: hotel);
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HotelCard extends StatelessWidget {
+  final Map<String, dynamic> hotel;
+  HotelCard({required this.hotel});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 230,
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(18)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade200,
+            spreadRadius: 4,
+            blurRadius: 6,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(18),
+                topRight: Radius.circular(18),
+              ),
+              image: DecorationImage(
+                image: AssetImage(hotel['picture']),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.favorite_border,
+                      color: d_green,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          hotel['name'],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Text(
+                              '${hotel['location']} • ${hotel['distance']} km to city',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(width: 3),
+                            Icon(Icons.location_on, color: d_green, size: 14),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Icon(Icons.star, color: Colors.amber, size: 14),
+                            Icon(Icons.star, color: Colors.amber, size: 14),
+                            Icon(Icons.star, color: Colors.amber, size: 14),
+                            Icon(Icons.star, color: Colors.amber, size: 14),
+                            Icon(
+                              Icons.star_outline,
+                              color: Colors.amber,
+                              size: 14,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              '${hotel['review']} reviews',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    '\$${hotel['price']}/night',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: d_green,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
